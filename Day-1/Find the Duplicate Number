@@ -1,41 +1,12 @@
-class WordDictionary {
-    public class trienode{
-        HashMap<Character,trienode> child=new HashMap<>();
-        Boolean endWord=false;
-    }
-    public trienode root;
-    public WordDictionary() {
-        root=new trienode();
-    }
-    
-    public void addWord(String word) {
-         trienode node=root;
-        for(char c:word.toCharArray()){
-            node.child.putIfAbsent(c,new trienode());
-            node=node.child.get(c);
-        }
-        node.endWord=true;
-        
-    }
-    
-    public boolean search(String word) {
-        trienode node=root;
-        for(char c:word.toCharArray()){
-            if(c=='.'){
-                c++;
+class Solution {
+    public int findDuplicate(int[] nums) {
+        HashSet<Integer> seen=new HashSet<>();
+        for(int i:nums){
+            if(seen.contains(i)){
+                return i;
             }
-            node=node.child.get(c);
-            else if(node==null){
-                return false;
-            }
+            seen.add(i);
         }
-        return node.endWord;
+        return -1;
     }
 }
-
-/**
- * Your WordDictionary object will be instantiated and called as such:
- * WordDictionary obj = new WordDictionary();
- * obj.addWord(word);
- * boolean param_2 = obj.search(word);
- */
