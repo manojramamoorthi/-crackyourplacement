@@ -1,0 +1,41 @@
+class WordDictionary {
+    public class trienode{
+        HashMap<Character,trienode> child=new HashMap<>();
+        Boolean endWord=false;
+    }
+    public trienode root;
+    public WordDictionary() {
+        root=new trienode();
+    }
+    
+    public void addWord(String word) {
+         trienode node=root;
+        for(char c:word.toCharArray()){
+            node.child.putIfAbsent(c,new trienode());
+            node=node.child.get(c);
+        }
+        node.endWord=true;
+        
+    }
+    
+    public boolean search(String word) {
+        trienode node=root;
+        for(char c:word.toCharArray()){
+            if(c=='.'){
+                c++;
+            }
+            node=node.child.get(c);
+            else if(node==null){
+                return false;
+            }
+        }
+        return node.endWord;
+    }
+}
+
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary obj = new WordDictionary();
+ * obj.addWord(word);
+ * boolean param_2 = obj.search(word);
+ */
