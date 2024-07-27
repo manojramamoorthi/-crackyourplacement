@@ -1,0 +1,49 @@
+class Trie {
+    public class trienode{
+        HashMap<Character,trienode> child=new HashMap<>();
+        Boolean endWord=false;
+    }
+    public trienode root;
+    public Trie() {
+        root=new trienode();
+    }
+    
+    public void insert(String word) {
+        trienode node=root;
+        for(char c:word.toCharArray()){
+            node.child.putIfAbsent(c,new trienode());
+            node=node.child.get(c);
+        }
+        node.endWord=true;
+    }
+    
+    public boolean search(String word) {
+        trienode node=root;
+        for(char c:word.toCharArray()){
+            node=node.child.get(c);
+            if(node==null){
+                return false;
+            }
+        }
+        return node.endWord;
+    }
+    
+    public boolean startsWith(String prefix) {
+        trienode node=root;
+        for(char c:prefix.toCharArray()){
+            node=node.child.get(c);
+            if(node==null){
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie obj = new Trie();
+ * obj.insert(word);
+ * boolean param_2 = obj.search(word);
+ * boolean param_3 = obj.startsWith(prefix);
+ */
