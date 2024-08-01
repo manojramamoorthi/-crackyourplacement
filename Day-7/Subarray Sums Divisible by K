@@ -1,0 +1,3 @@
+class Solution:
+    def subarraysDivByK(self, a: List[int], k: int) -> int:
+        return sum(comb(v,2) for v in Counter([0]+[p%k for p in accumulate(a)]).values())
