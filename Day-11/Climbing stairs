@@ -1,0 +1,14 @@
+class Solution {
+    public int climbStairs(int n) {
+        if(n<=3){
+            return n;
+        }
+        int st[]={1,2,3};
+        for(int i=4;i<=n;i++){
+            st[0]=st[1];
+            st[1]=st[2];
+            st[2]=st[0]+st[1];
+        }
+        return st[2];
+    }
+}
